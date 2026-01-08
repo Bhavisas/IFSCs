@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Restaurant | 3D Experience</title>
+    <style>
+        /* Base Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #2c3e50, #000000);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px; /* Essential for 3D depth */
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        /* The 3D Container */
+        .scene {
+            width: 300px;
+            height: 300px;
+            perspective: 600px;
+        }
+
+        /* The Cube (Menu) */
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 15s infinite linear;
+        }
+
+        .cube:hover {
+            animation-play-state: paused;
+        }
+
+        .face {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid #d4af37;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            backface-visibility: visible;
+        }
+
+        /* Positioning the 6 faces in 3D Space */
+        .front  { transform: rotateY(0deg) translateZ(150px); }
+        .back   { transform: rotateY(180deg) translateZ(150px); }
+        .right  { transform: rotateY(90deg) translateZ(150px); }
+        .left   { transform: rotateY(-90deg) translateZ(150px); }
+        .top    { transform: rotateX(90deg) translateZ(150px); }
+        .bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+        /* Cube Content Styling */
+        .face h2 { color: #d4af37; margin-bottom: 10px; }
+        .face p { font-size: 0.9rem; opacity: 0.8; }
+
+        /* Rotation Animation */
+        @keyframes rotateCube {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* 3D Button */
+        .btn {
+            margin-top: 80px;
+            padding: 15px 40px;
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+        }
+
+        .btn:hover {
+            background: #d4af37;
+            color: black;
+            box-shadow: 0 0 30px #d4af37;
+            transform: translateZ(50px) scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ansh Restaurant</h1>
+
+    <div class="scene">
+        <div class="cube">
+            <div class="face front">
+                <h2>Signature</h2>
+                <p>Paneer Butter Masala<br>Special Butter Naan</p>
+            </div>
+            <div class="face back">
+                <h2>Starters</h2>
+                <p>Crispy Corn<br>Honey Chilli Potato</p>
+            </div>
+            <div class="face right">
+                <h2>Drinks</h2>
+                <p>Fresh Lime Soda<br>Virgin Mojito</p>
+            </div>
+            <div class="face left">
+                <h2>Desserts</h2>
+                <p>Gulab Jamun<br>Royal Kulfi</p>
+            </div>
+            <div class="face top">
+                <h2>Main Course</h2>
+                <p>Dal Makhani<br>Veg Biryani</p>
+            </div>
+            <div class="face bottom">
+                <h2>Specials</h2>
+                <p>Chef's Platter<br>Tandoori Sizzler</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn" onclick="alert('Table Reserved at Ansh Restaurant!')">BOOK A TABLE</button>
+
+</body>
+</html>
