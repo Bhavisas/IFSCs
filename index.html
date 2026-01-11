@@ -3,143 +3,961 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ansh Restaurant | 3D Experience</title>
+    <title>Ansh Restaurant - Culinary Excellence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base Styling */
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #2c3e50, #000000);
-            color: white;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            height: 100vh;
+        }
+        
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --light: #FFF8E1;
+            --dark: #1A1A1A;
+            --text: #333333;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--dark);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-container {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            perspective: 1000px; /* Essential for 3D depth */
         }
-
-        h1 {
-            font-size: 3rem;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        
+        .logo {
+            color: var(--secondary);
+            font-size: 28px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 30px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
             margin-bottom: 50px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
         }
-
-        /* The 3D Container */
-        .scene {
-            width: 300px;
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Photo Gallery Section */
+        .gallery-section {
+            background-color: var(--light);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
             height: 300px;
-            perspective: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
-
-        /* The Cube (Menu) */
-        .cube {
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gallery-item img {
             width: 100%;
             height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotateCube 15s infinite linear;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
-
-        .cube:hover {
-            animation-play-state: paused;
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
-
-        .face {
+        
+        .gallery-overlay {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            border: 2px solid #d4af37;
-            background: rgba(0, 0, 0, 0.8);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-overlay p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Culinary Excellence Section */
+        .excellence-section {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        .excellence-content {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .excellence-text {
+            flex: 1;
+        }
+        
+        .excellence-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .excellence-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .excellence-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .excellence-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .experience-item {
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .experience-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .experience-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .experience-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .experience-item p {
+            color: #666;
+        }
+        
+        /* Address Section */
+        .address-section {
+            background-color: var(--light);
+        }
+        
+        .address-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .address-info {
+            flex: 1;
+        }
+        
+        .address-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .address-details {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .address-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .address-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
+            margin-right: 15px;
             font-size: 1.2rem;
+        }
+        
+        .address-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .address-text p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .address-map {
+            flex: 1;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background-color: #e9e9e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .map-placeholder {
             text-align: center;
             padding: 20px;
-            box-sizing: border-box;
-            backface-visibility: visible;
         }
-
-        /* Positioning the 6 faces in 3D Space */
-        .front  { transform: rotateY(0deg) translateZ(150px); }
-        .back   { transform: rotateY(180deg) translateZ(150px); }
-        .right  { transform: rotateY(90deg) translateZ(150px); }
-        .left   { transform: rotateY(-90deg) translateZ(150px); }
-        .top    { transform: rotateX(90deg) translateZ(150px); }
-        .bottom { transform: rotateX(-90deg) translateZ(150px); }
-
-        /* Cube Content Styling */
-        .face h2 { color: #d4af37; margin-bottom: 10px; }
-        .face p { font-size: 0.9rem; opacity: 0.8; }
-
-        /* Rotation Animation */
-        @keyframes rotateCube {
-            from { transform: rotateX(0deg) rotateY(0deg); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
+        
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
-
-        /* 3D Button */
-        .btn {
-            margin-top: 80px;
-            padding: 15px 40px;
-            background: transparent;
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            cursor: pointer;
-            font-weight: bold;
+        
+        .map-placeholder h4 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .map-placeholder p {
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
             transition: all 0.3s;
-            transform-style: preserve-3d;
-            transform: translateZ(20px);
         }
-
-        .btn:hover {
-            background: #d4af37;
-            color: black;
-            box-shadow: 0 0 30px #d4af37;
-            transform: translateZ(50px) scale(1.1);
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content, .excellence-content, .address-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .address-map {
+                height: 300px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--dark);
+                padding: 20px;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-utensils"></i>
+                Ansh Restaurant
+            </a>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#excellence">Excellence</a></li>
+                    <li><a href="#address">Address</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <h1>Ansh Restaurant</h1>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Ansh Restaurant</h1>
+            <p>Where culinary artistry meets an unforgettable dining experience. Discover flavors crafted with passion and served with elegance in our exquisite ambiance.</p>
+            <a href="#gallery" class="btn">View Our Gallery</a>
+        </div>
+    </section>
 
-    <div class="scene">
-        <div class="cube">
-            <div class="face front">
-                <h2>Signature</h2>
-                <p>Paneer Butter Masala<br>Special Butter Naan</p>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
             </div>
-            <div class="face back">
-                <h2>Starters</h2>
-                <p>Crispy Corn<br>Honey Chilli Potato</p>
-            </div>
-            <div class="face right">
-                <h2>Drinks</h2>
-                <p>Fresh Lime Soda<br>Virgin Mojito</p>
-            </div>
-            <div class="face left">
-                <h2>Desserts</h2>
-                <p>Gulab Jamun<br>Royal Kulfi</p>
-            </div>
-            <div class="face top">
-                <h2>Main Course</h2>
-                <p>Dal Makhani<br>Veg Biryani</p>
-            </div>
-            <div class="face bottom">
-                <h2>Specials</h2>
-                <p>Chef's Platter<br>Tandoori Sizzler</p>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Restaurant Interior">
+                </div>
+                
+                <div class="about-text">
+                    <h3>Creating Culinary Excellence Since 2005</h3>
+                    <p>Ansh Restaurant was founded with a passion for bringing authentic flavors to the modern dining table. Our journey began with a simple vision: to create a space where food is not just eaten, but experienced.</p>
+                    <p>Our chefs combine traditional recipes with contemporary techniques, resulting in dishes that are both familiar and innovative. We believe in sustainability and source our ingredients from local farmers and producers.</p>
+                    <p>Whether you're celebrating a special occasion or enjoying a casual dinner, our team is dedicated to providing an exceptional dining experience in an elegant and welcoming atmosphere.</p>
+                    <a href="#excellence" class="btn">Our Culinary Excellence</a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <button class="btn" onclick="alert('Table Reserved at Ansh Restaurant!')">BOOK A TABLE</button>
+    <!-- Photo Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1365&q=80" alt="Elegant Dining Area">
+                    <div class="gallery-overlay">
+                        <h3>Elegant Dining</h3>
+                        <p>Our beautifully designed dining area with ambient lighting</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Chef Preparing Dish">
+                    <div class="gallery-overlay">
+                        <h3>Master Chefs</h3>
+                        <p>Our skilled chefs preparing dishes with precision and passion</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Exquisite Plated Dish">
+                    <div class="gallery-overlay">
+                        <h3>Artistic Presentation</h3>
+                        <p>Every dish is a masterpiece of flavor and visual appeal</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Wine Collection">
+                    <div class="gallery-overlay">
+                        <h3>Curated Wine Collection</h3>
+                        <p>Extensive selection of fine wines from around the world</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dessert Selection">
+                    <div class="gallery-overlay">
+                        <h3>Decadent Desserts</h3>
+                        <p>Sweet creations that are the perfect ending to any meal</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Private Dining Room">
+                    <div class="gallery-overlay">
+                        <h3>Private Events</h3>
+                        <p>Elegant spaces for intimate gatherings and celebrations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Culinary Excellence Section -->
+    <section class="excellence-section" id="excellence">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: var(--secondary);">Culinary Excellence</h2>
+            </div>
+            
+            <div class="excellence-content">
+                <div class="excellence-text">
+                    <h3>The Art of Fine Dining</h3>
+                    <p>At Ansh Restaurant, we believe that dining is an experience that engages all the senses. Our culinary team, led by Executive Chef Marco Rossi, creates dishes that are not only delicious but also visually stunning.</p>
+                    <p>We source the finest ingredients from local farmers and trusted suppliers around the world. Each ingredient is selected for its quality, flavor, and sustainability.</p>
+                    <p>Our menu changes seasonally to ensure we're always offering the freshest and most innovative dishes, while maintaining the classic favorites that our guests love.</p>
+                    <p>From the moment you enter our restaurant to the last bite of dessert, every detail is carefully considered to create an unforgettable dining experience.</p>
+                </div>
+                
+                <div class="excellence-image">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Chef Preparing Fine Dining Dish">
+                </div>
+            </div>
+            
+            <!-- Experience Highlights -->
+            <div class="experience-grid" style="margin-top: 60px;">
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We source locally and seasonally for the freshest flavors in every dish.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-wine-glass-alt"></i>
+                    </div>
+                    <h3>Wine Pairing</h3>
+                    <p>Expertly curated wine selection with perfect pairing recommendations.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3>Exceptional Service</h3>
+                    <p>Attentive and knowledgeable staff dedicated to your dining pleasure.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Award Winning</h3>
+                    <p>Recipient of multiple culinary awards and recognitions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Address Section -->
+    <section class="address-section" id="address">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Location</h2>
+            </div>
+            
+            <div class="address-container">
+                <div class="address-info">
+                    <h3>Visit Us Today</h3>
+                    <div class="address-details">
+                        <div class="address-item">
+                            <div class="address-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="address-text">
+                                <h4>Main Address</h4>
+                                <p>Bhind Saniya Hospital, Manna ka Road<br>
+                                   Sastri Nagar, Alwar Pilot 6/7<br>
+                                   Rajasthan, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="address-item">
+                            <div class="address-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="address-text">
+                                <h4>Contact Number</h4>
+                                <p>+91 78500 60184<br>+91 70146 01068 (Reservations)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="address-item">
+                            <div class="address-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="address-text">
+                                <h4>Email Address</h4>
+                                <p>Anshsachdeva10108@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="address-item">
+                            <div class="address-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="address-text">
+                                <h4>Parking Information</h4>
+                                <p>Ample parking space available<br>Complimentary for dining guests</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="address-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h4>Location Map</h4>
+                        <p>We're conveniently located near Bhind Sainia Hospital</p>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: #888;">
+                            <strong>Landmarks nearby:</strong><br>
+                            • Bhind Saniya Hospital<br>
+                            • Sastri Nagar Area<br>
+                            • Alwar Pilot 6/7
+                        </p>
+                        <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 8px;">
+                            <p style="color: #666; margin: 0;">
+                                <i class="fas fa-bus" style="color: var(--primary);"></i> 
+                                <strong>Local Transport:</strong> Easily accessible by auto-rickshaw and local buses
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h4>Ansh Restaurant</h4>
+                    <p>Experience the finest dining with a perfect blend of traditional flavors and modern culinary artistry.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#excellence">Culinary Excellence</a></li>
+                        <li><a href="#address">Our Location</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contact Information</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Bhind Saniya Hospital, Manna ka Road, Sastri Nagar, Alwar</p>
+                        <p><i class="fas fa-phone"></i> +91 78500 60184</p>
+                        <p><i class="fas fa-envelope"></i> Anshsachdeva10108@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Ansh Restaurant. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary);"></i> for food lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Gallery image hover effect enhancement
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const img = item.querySelector('img');
+                img.style.transform = 'scale(1.1)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                const img = item.querySelector('img');
+                img.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Address section interactive effect
+        const addressItems = document.querySelectorAll('.address-item');
+        
+        addressItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const icon = item.querySelector('.address-icon');
+                icon.style.transform = 'scale(1.1)';
+                icon.style.transition = 'transform 0.3s';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                const icon = item.querySelector('.address-icon');
+                icon.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>
